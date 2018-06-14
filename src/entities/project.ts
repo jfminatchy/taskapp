@@ -18,7 +18,7 @@ export class Project extends BaseEntity {
 
     @OneToMany(type => Task, task => task.project, {
         eager: true,
-        cascade:  ['remove']
+        cascade: ['update']
     })
     tasks: Task[];
 }

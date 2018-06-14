@@ -20,7 +20,7 @@ export class Task extends BaseEntity {
     done: boolean;
 
     @ManyToOne(type => Project, project => project.tasks, {
-        cascade: ['update']
+        cascade: ['remove']
     })
     project: Project;
 }
