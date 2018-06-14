@@ -6,7 +6,15 @@ import {Page} from "../page";
 @Component({
     moduleId: module.id,
     selector: 'projects',
-    templateUrl: `${__dirname}/projects.component.html`
+    templateUrl: `${__dirname}/projects.component.html`,
+    styles: [
+        `span.badge {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            padding: 0;
+        }`
+    ]
 })
 export class ProjectsComponent implements OnInit {
 

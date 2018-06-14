@@ -12,6 +12,11 @@ import {Project} from '../../entities/project';
             height: 30px;
             border-radius: 50%;
             background: none;
+        }`,
+        `span.badge {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
         }`
     ]
 })
@@ -27,8 +32,7 @@ export class NewProjectFormComponent {
         this.newProject.save()
             .then(() => {
                 this.projectSaved.emit(this.newProject);
-                this.newProject.id = null;
-                ngForm.resetForm();
+                this.newProject = new Project();
             });
     }
 }

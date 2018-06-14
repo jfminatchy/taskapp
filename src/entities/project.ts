@@ -14,7 +14,7 @@ export class Project extends BaseEntity {
     description: string;
 
     @Column({type: 'text', nullable: true, default: '#a3a3a3'})
-    color: string;
+    color: string = '#a3a3a3';
 
     @OneToMany(type => Task, task => task.project, {
         eager: true,

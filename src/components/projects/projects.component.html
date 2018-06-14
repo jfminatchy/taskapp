@@ -12,7 +12,7 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let project of projects" [id]="project.id">
-                        <td>{{project.name}}</td>
+                        <td><span class="badge" [style.background-color]="project.color"> </span> {{project.name}}</td>
                         <td>{{project.description}}</td>
                         <td>
                             <button class="btn btn-info btn-sm" [routerLink]="['/projects', project.id]"><i class="ti-pencil"></i></button>
