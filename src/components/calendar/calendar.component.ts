@@ -28,7 +28,6 @@ export class CalendarComponent implements OnInit {
                     aspectRatio: 1.5,
                     header: {
                             left:   'title',
-                            center: 'month,agendaWeek,agendaDay',
                             right:  'today, prev, next'
                         },
                     events: (start: Moment, end: Moment, timezone, callback) => {
@@ -39,7 +38,9 @@ export class CalendarComponent implements OnInit {
                                     return {
                                         title: task.name,
                                         start: task.date,
-                                        backgroundColor: (task.project.color) ? task.project.color : 'grey'
+                                        backgroundColor: task.project.color,
+                                        textColor: (task.project.color > '#a3a3a3') ? '#000' : '#fff',
+                                        borderColor: '#fff'
                                     };
                                 }));
                             });
