@@ -30,12 +30,8 @@ export class CalendarComponent implements OnInit {
                             left:   'title',
                             right:  'today, prev, next'
                         },
-                    events: (start: Moment, end: Moment, timezone, callback) => {
-
-                        this.getTasks(start, end)
-                            .then((tasks) => {
-                                callback(tasks);
-                            });
+                    events: async (start: Moment, end: Moment, timezone, callback) => {
+                        callback(await this.getTasks(start, end));
                     },
                     editable: true,
                     eventDrop: (event, delta, revertFunc) => {
