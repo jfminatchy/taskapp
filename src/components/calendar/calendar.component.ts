@@ -3,6 +3,7 @@ import {Between, getRepository, LessThan, Repository} from 'typeorm';
 import {Task} from '../../entities/task';
 import * as $ from 'jquery';
 import 'fullcalendar';
+import {Moment} from "moment";
 
 @Component({
     selector: 'calendar',
@@ -28,13 +29,13 @@ export class CalendarComponent implements OnInit {
                     header: {
                             left:   'title',
                             center: 'month,agendaWeek,agendaDay',
-                            right:  'today prev,next'
+                            right:  'today, prev, next'
                         },
-                    events: (start, end, timezone, callback) => {
-                        this.getTasks()
+                    events: (start: Moment, end: Moment, timezone, callback) => {
+
+                        this.getTasks(start, end)
                             .then((tasks) => {
                                 callback(tasks.map((task) => {
-                                    console.log(task);
                                     return {
                                         title: task.name,
                                         start: task.date,
@@ -56,9 +57,14 @@ export class CalendarComponent implements OnInit {
                 });
     }
 
-    getTasks() {
+    getTasks(start: Moment, end: Moment) {
         return new Promise((resolve, reject) => {
-            this.taskRepository.find({relations: ['project']})
+            this.taskRepository.find({
+                relations: ['project'],
+                where: {
+                    date: Between(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'))
+                }
+            })
                 .then((tasks) => {
                     resolve(tasks);
                 })

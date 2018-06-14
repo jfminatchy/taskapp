@@ -13,7 +13,7 @@ export class Project extends BaseEntity {
     @Column({type: 'text', nullable: true})
     description: string;
 
-    @Column({type: 'text', nullable: true})
+    @Column({type: 'text', nullable: true, default: '#a3a3a3'})
     color: string;
 
     @OneToMany(type => Task, task => task.project, {
