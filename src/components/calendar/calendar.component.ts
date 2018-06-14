@@ -11,7 +11,7 @@ import 'fullcalendar';
 export class CalendarComponent implements OnInit {
 
     @ViewChild('calendar', {read: ElementRef}) calendarContainer: ElementRef;
-    calendar = null;
+    calendar;
     taskRepository: Repository<Task>;
     events;
 
@@ -34,7 +34,7 @@ export class CalendarComponent implements OnInit {
                         this.getTasks()
                             .then((tasks) => {
                                 callback(tasks.map((task) => {
-                                    console.log(task.project.color);
+                                    console.log(task);
                                     return {
                                         title: task.name,
                                         start: task.date,
@@ -54,10 +54,6 @@ export class CalendarComponent implements OnInit {
 
                     }
                 });
-    }
-
-    constructor() {
-
     }
 
     getTasks() {

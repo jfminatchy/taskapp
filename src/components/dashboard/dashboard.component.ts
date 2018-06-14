@@ -1,7 +1,7 @@
 import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {getRepository, Repository} from 'typeorm';
 import {Task} from '../../entities/task';
-import {DatePipe} from "@angular/common";
+import * as moment from 'moment';
 
 @Component({
     selector: 'dashboard',
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
         this.taskRepository.find({
             relations: ['project'],
             where: {
-                date: `${today.getFullYear()}-${(today.getMonth() + 1 > 10 ) ? today.getMonth() + 1 : '0' + (today.getMonth() + 1)}-${(today.getDate() > 10 ) ? today.getDate() : '0' + today.getDate()}`
+                date: `${moment(today).format('YYYY-MM-DD')}`
             }
         })
             .then((tasks: Task[]) => {

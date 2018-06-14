@@ -59,6 +59,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "fullcalendar": "^3.9.0",
     "jquery": "^3.3.1",
+    "moment": "^2.22.2",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^5.5.10",
     "sql.js": "^0.5.0",
