@@ -34,15 +34,7 @@ export class CalendarComponent implements OnInit {
 
                         this.getTasks(start, end)
                             .then((tasks) => {
-                                callback(tasks.map((task) => {
-                                    return {
-                                        title: task.name,
-                                        start: task.date,
-                                        backgroundColor: task.project.color,
-                                        textColor: (task.project.color > '#a3a3a3') ? '#000' : '#fff',
-                                        borderColor: '#fff'
-                                    };
-                                }));
+                                callback(tasks);
                             });
                     },
                     editable: true,
@@ -67,7 +59,15 @@ export class CalendarComponent implements OnInit {
                 }
             })
                 .then((tasks) => {
-                    resolve(tasks);
+                    resolve(tasks.map((task) => {
+                        return {
+                            title: task.name,
+                            start: task.date,
+                            backgroundColor: task.project.color,
+                            textColor: (task.project.color > '#a3a3a3') ? '#000' : '#fff',
+                            borderColor: '#fff'
+                        };
+                    }));
                 })
                 .catch(e => console.error(e));
         });
