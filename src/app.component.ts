@@ -5,7 +5,7 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: `${__dirname}/app.component.html`
 })
 export class AppComponent implements OnInit {
-  public readonly name = 'The App';
+  public readonly name = 'TaskApp';
   public menuItems = [
       {title: 'Dashboard', route: '/', icon: 'ti-dashboard', exact: true},
       {title: 'Projets', route: '/projects', icon: 'ti-folder'}
