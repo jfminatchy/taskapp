@@ -1,0 +1,17 @@
+<form class="form-inline" (submit)="saveNewTask()" #newTaskForm="ngForm">
+    <div class="form-group" *ngIf="!project">
+        <select class="form-control border-input" name="project" [(ngModel)]="newTask.project">
+            <option *ngFor="let proj of projects" [value]="proj">{{proj.name}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control border-input" name="name" required [(ngModel)]="newTask.name">
+    </div>
+    <div class="form-group">
+        <textarea name="description" class="form-control border-input" rows="1" [(ngModel)]="newTask.description"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="date" name="date" class="form-control border-input" [(ngModel)]="newTask.date">
+    </div>
+    <button type="submit" class="btn btn-fill btn-primary" [disabled]="!newTaskForm.form.valid"><i class="ti-plus"></i></button>
+</form>

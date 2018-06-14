@@ -1,0 +1,34 @@
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th *ngIf="inCols('done')">Fait</th>
+            <th *ngIf="inCols('project')">Projet</th>
+            <th *ngIf="inCols('name')">Nom</th>
+            <th *ngIf="inCols('date')">Date</th>
+            <th *ngIf="inCols('actions')">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of tasks">
+            <td *ngIf="inCols('done')"><input type="checkbox" name="done" (change)="saveTask(task)" [(ngModel)]="task.done"></td>
+            <td *ngIf="inCols('project')">{{task.project.name}}</td>
+            <td *ngIf="inCols('name')">
+                <p [ngClass]="{'text-muted': task.done}">
+                    <span *ngIf="taskEdit != task">{{task.name}}</span>
+                    <input *ngIf="taskEdit == task" [formControl]="nameInput" [(ngModel)]="task.name" required class="input-sm form-control border-input" type="text" name="name">
+                    <small *ngIf="taskEdit != task" [ngClass]="{'text-muted': task.done}" *ngIf="inCols('description')"><br />{{task.description}}</small>
+                    <textarea *ngIf="taskEdit == task" [formControl]="descriptionInput" [(ngModel)]="task.description" class="input-sm form-control border-input" name="description" rows="1" placeholder="Description"></textarea>
+                </p>
+            </td>
+            <td *ngIf="inCols('date')">
+                <span *ngIf="taskEdit != task">{{task.date | date:'dd/MM/yyyy'}}</span>
+                <input *ngIf="taskEdit == task" [formControl]="dateInput" [(ngModel)]="task.date" class="input-sm form-control border-input" type="date" name="date">
+            </td>
+            <td *ngIf="inCols('actions')">
+                <button class="btn btn-info btn-sm" [disabled]="taskEdit != false" *ngIf="taskEdit != task" (click)="triggerEdit(task)" ><i class="ti-pencil"></i></button>
+                <button class="btn btn-info btn-sm" [disabled]="nameInput.invalid || descriptionInput.invalid || dateInput.invalid"  *ngIf="taskEdit == task" (click)="saveTask(task)" ><i class="ti-save"></i></button>
+                <button class="btn btn-danger btn-sm" *ngIf="taskEdit != task" (click)="deleteTask(task, $event)"><i class="ti-close"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>

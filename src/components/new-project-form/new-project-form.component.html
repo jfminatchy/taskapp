@@ -1,0 +1,16 @@
+<form (ngSubmit)="onSubmit(newProjectForm)" class="form-inline" #newProjectForm="ngForm">
+    <div class="form-group">
+        <input type="color" placeholder="Couleur" [(ngModel)]="newProject.color" name="color"
+               class="border-input" value="#efefef">
+    </div>
+    <div class="form-group">
+        <input type="text" placeholder="Nom" required [(ngModel)]="newProject.name" name="name"
+               class="form-control border-input">
+    </div>
+    <div class="form-group">
+                                <textarea name="description" rows="1" [(ngModel)]="newProject.description"
+                                          class="form-control border-input" placeholder="Description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-info btn-fill"
+            [disabled]="!newProjectForm.form.valid"><i class="ti-plus"></i></button>
+</form>

@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <div class="sidebar" data-background-color="black" data-active-color="danger">
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a routerLink="/" class="simple-text">TaskApp</a>
+            </div>
+            <ul class="nav">
+                <li *ngFor="let item of menuItems" [routerLink]="item.route" routerLinkActive="active" [routerLinkActiveOptions]="{exact: item.exact}">
+                    <a [routerLink]="item.route">
+                        <i *ngIf="item.icon" [class]="item.icon"></i>
+                        <p>{{item.title}}</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <nav class="navbar navbar-ct-danger">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">{{name}}</a>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <router-outlet (activate)="onRouterActivate($event)"></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

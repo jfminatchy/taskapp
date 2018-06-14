@@ -1,0 +1,81 @@
+{
+  "name": "taskapp",
+  "productName": "taskapp",
+  "version": "0.1.0",
+  "description": "Desktop application to manage tasks. Made with Electron",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "tslint src"
+  },
+  "keywords": [],
+  "author": "jf.minatchy",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm"
+      },
+      "electronWinstallerConfig": {
+        "name": "task_app"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "taskapp"
+      }
+    }
+  },
+  "dependencies": {
+    "@angular/common": "^5.2.10",
+    "@angular/compiler": "^5.2.10",
+    "@angular/core": "^5.2.10",
+    "@angular/forms": "^5.2.10",
+    "@angular/platform-browser": "^5.2.10",
+    "@angular/platform-browser-dynamic": "^5.2.10",
+    "@angular/router": "^5.2.10",
+    "electron-compile": "^6.4.2",
+    "electron-devtools-installer": "^2.2.3",
+    "electron-squirrel-startup": "^1.0.0",
+    "fullcalendar": "^3.9.0",
+    "jquery": "^3.3.1",
+    "reflect-metadata": "^0.1.12",
+    "rxjs": "^5.5.10",
+    "sql.js": "^0.5.0",
+    "sqlite3": "^4.0.0",
+    "tslib": "^1.9.0",
+    "typeorm": "^0.2.0-alpha.46",
+    "zone.js": "^0.7.8"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.3.2",
+    "@types/node": "^9.6.5",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "electron-forge": "^5.2.0",
+    "electron-prebuilt-compile": "1.8.4",
+    "tslint": "^4.5.1",
+    "typescript": "^2.8.1"
+  }
+}

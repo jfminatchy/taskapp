@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <task-list [tasks]="todayTasks" [cols]="['done', 'project', 'name', 'description']"></task-list>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card" style="padding: 10px; margin-bottom: 0">
+            <calendar></calendar>
+        </div>
+    </div>
+</div>
