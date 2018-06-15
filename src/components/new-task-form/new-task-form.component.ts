@@ -17,7 +17,11 @@ export class NewTaskFormComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         this.manager = getManager();
-        this.getProjects();
+
+        if (!this.project) {
+            this.getProjects();
+        }
+
         this.newTask = new Task();
         this.resetNewTask();
         // console.log(this.newTask);
