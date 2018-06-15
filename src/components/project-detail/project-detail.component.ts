@@ -15,12 +15,22 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
 
     constructor(private route: ActivatedRoute) {
         this.manager = getManager();
-        this.getProject();
-        this.title = this.project.name;
+        // this.getProject();
+        // this.title = this.project.name;
     }
 
     ngOnChanges(changes: SimpleChanges): void {}
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.route.data
+            .subscribe((data: {project: Project}) => {
+                this.project = data.project;
+                this.project.tasks = this.project.tasks.map((task: Task) => {
+                    task.project = this.project;
+                    return task;
+                });
+                this.title = data.project.name;
+            });
+    }
 
     async getProject() {
         this.manager.findOne(

@@ -11,7 +11,8 @@ import {NewProjectFormComponent} from './components/new-project-form/new-project
 import {ProjectDetailComponent} from './components/project-detail/project-detail.component';
 import {NewTaskFormComponent} from './components/new-task-form/new-task-form.component';
 import {TaskListComponent} from './components/task-list/task-list.component';
-import {CalendarComponent} from "./components/calendar/calendar.component";
+import {CalendarComponent} from './components/calendar/calendar.component';
+import {ProjectDetailResolve} from './providers/resolver/project-detail.resolve';
 
 @NgModule({
     imports: [
@@ -33,7 +34,8 @@ import {CalendarComponent} from "./components/calendar/calendar.component";
         CalendarComponent
     ],
     providers: [
-        {provide: LocationStrategy, useClass: HashLocationStrategy}
+        {provide: LocationStrategy, useClass: HashLocationStrategy},
+        ProjectDetailResolve
     ],
     bootstrap: [AppComponent]
 })

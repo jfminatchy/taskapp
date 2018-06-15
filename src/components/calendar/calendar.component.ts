@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Between, getRepository, LessThan, Repository} from 'typeorm';
+import {Between, getRepository, Repository} from 'typeorm';
 import {Task} from '../../entities/task';
 import * as $ from 'jquery';
 import 'fullcalendar';
-import {Moment} from "moment";
+import {Moment} from 'moment';
 
 @Component({
     selector: 'calendar',
@@ -12,9 +12,8 @@ import {Moment} from "moment";
 export class CalendarComponent implements OnInit {
 
     @ViewChild('calendar', {read: ElementRef}) calendarContainer: ElementRef;
-    calendar;
+    calendar: JQuery<HTMLElement>;
     taskRepository: Repository<Task>;
-    events;
 
     constructor() {
         this.taskRepository = getRepository(Task);
@@ -22,28 +21,29 @@ export class CalendarComponent implements OnInit {
 
     ngOnInit(): void {
         this.calendar = $(this.calendarContainer.nativeElement);
-                this.calendar.fullCalendar({
-                    locale: 'fr',
-                    themeSystem: 'bootstrap3',
-                    aspectRatio: 1.5,
-                    header: {
-                            left:   'title',
-                            right:  'today, prev, next'
-                        },
-                    events: async (start: Moment, end: Moment, timezone, callback) => {
-                        callback(await this.getTasks(start, end));
-                    },
-                    editable: true,
-                    eventDrop: (event, delta, revertFunc) => {
+        
+        this.calendar.fullCalendar({
+            locale: 'fr',
+            themeSystem: 'bootstrap3',
+            aspectRatio: 1.5,
+            header: {
+                    left:   'title',
+                    right:  'today, prev, next'
+                },
+            events: async (start: Moment, end: Moment, timezone, callback) => {
+                callback(await this.getTasks(start, end));
+            },
+            editable: true,
+            eventDrop: (event, delta, revertFunc) => {
 
-                        alert(event.title + " was dropped on " + event.start.format());
+                alert(event.title + " was dropped on " + event.start.format());
 
-                        if (!confirm("Are you sure about this change?")) {
-                            revertFunc();
-                        }
+                if (!confirm("Are you sure about this change?")) {
+                    revertFunc();
+                }
 
-                    }
-                });
+            }
+        });
     }
 
     getTasks(start: Moment, end: Moment) {
