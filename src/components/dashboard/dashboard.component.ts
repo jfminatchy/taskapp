@@ -1,5 +1,5 @@
 import {Component, OnInit, SimpleChanges} from '@angular/core';
-import {getRepository, Repository} from 'typeorm';
+import {getRepository, IsNull, Repository} from 'typeorm';
 import {Task} from '../../entities/task';
 import * as moment from 'moment';
 
@@ -9,22 +9,42 @@ import * as moment from 'moment';
 })
 export class DashboardComponent implements OnInit {
     title = 'Dashboard';
-    todayTasks: Task[];
+    taskList: Task[];
     taskRepository: Repository<Task>;
+    taskCase: string;
 
     ngOnInit(changes: SimpleChanges): void {
         this.taskRepository = getRepository(Task);
-        let today = new Date();
+
+        this.getTasks();
+    }
+
+    getTasks(taskCase?: string) {
+
+        let where = {
+            date: null
+        };
+
+        switch (taskCase) {
+            case 'not-planned':
+                where.date = IsNull();
+                where['done'] = false;
+                break;
+            default:
+                let today = new Date();
+                where.date = `${moment(today).format('YYYY-MM-DD')}`;
+                taskCase = 'now';
+                break;
+        }
 
         this.taskRepository.find({
             relations: ['project'],
-            where: {
-                date: `${moment(today).format('YYYY-MM-DD')}`
-            }
+            where: where
         })
             .then((tasks: Task[]) => {
                 console.log(tasks);
-                this.todayTasks = tasks;
+                this.taskCase = taskCase;
+                this.taskList = tasks;
             });
     }
 }

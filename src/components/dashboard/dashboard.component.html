@@ -1,7 +1,10 @@
 <div class="row">
     <div class="col-md-4">
         <div class="card">
-            <task-list [tasks]="todayTasks" [cols]="['done', 'project', 'name', 'description']"></task-list>
+            <button class="btn btn-primary" (click)="getTasks()" [ngClass]="{'btn-fill': (taskCase == 'now')}">Aujourd'hui</button>
+            <button class="btn btn-primary" (click)="getTasks('not-planned')" [ngClass]="{'btn-fill': (taskCase == 'not-planned')}">A Planifier</button>
+
+            <task-list [tasks]="taskList" [cols]="['done', 'project', 'name', 'description']"></task-list>
         </div>
     </div>
     <div class="col-md-8">

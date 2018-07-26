@@ -21,7 +21,7 @@ export class CalendarComponent implements OnInit {
 
     ngOnInit(): void {
         this.calendar = $(this.calendarContainer.nativeElement);
-        
+
         this.calendar.fullCalendar({
             locale: 'fr',
             themeSystem: 'bootstrap3',
@@ -36,9 +36,9 @@ export class CalendarComponent implements OnInit {
             editable: true,
             eventDrop: (event, delta, revertFunc) => {
 
-                alert(event.title + " was dropped on " + event.start.format());
+                alert(event.title + ' was dropped on ' + event.start.format());
 
-                if (!confirm("Are you sure about this change?")) {
+                if (!confirm('Are you sure about this change?')) {
                     revertFunc();
                 }
 
