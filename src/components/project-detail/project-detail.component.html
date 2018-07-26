@@ -26,8 +26,11 @@
 <div class="col-md-8">
     <div class="card">
         <div class="header">
-            <h4>Tâches</h4>
-            <new-task-form [project]="project" (taskSaved)="getProject()"></new-task-form>
+            <h4>
+                Tâches
+                <a (click)="showNewTaskForm = !showNewTaskForm" class="btn btn-xs btn-primary"><i [ngClass]="{'ti-minus': showNewTaskForm, 'ti-plus': !showNewTaskForm}"></i></a>
+            </h4>
+            <new-task-form *ngIf="showNewTaskForm" [project]="project" (taskSaved)="getProject()"></new-task-form>
         </div>
         <div class="content table-responsive table-full-width">
             <task-list [tasks]="project.tasks" (taskDelete)="onTaskDelete()"></task-list>

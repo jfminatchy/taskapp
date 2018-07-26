@@ -12,6 +12,7 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
     project: Project = new Project();
     manager: EntityManager;
     title: string = 'Projet';
+    showNewTaskForm = false;
 
     constructor(private route: ActivatedRoute) {
         this.manager = getManager();
